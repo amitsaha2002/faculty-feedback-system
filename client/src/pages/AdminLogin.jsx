@@ -129,15 +129,6 @@ const AdminLogin = () => {
           </div>
         </div>
 
-        <div className={styles.supportLinks}>
-          <a href="#">
-            <i>Forget Password?</i>
-          </a>
-          <a href="#">
-            <i>Need Help? Contact Support.</i>
-          </a>
-        </div>
-
         <div className={styles.formSubmit}>
           <button id="loginBtn" onClick={handleLogin}>
             Login
