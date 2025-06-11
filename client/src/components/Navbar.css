@@ -1,0 +1,67 @@
+/* Navbar.css */
+.navbar {
+  background-color: white; /* Dark background */
+  padding: 1rem 2rem; /* Space around the navbar */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid wheat;
+}
+
+.navbar .logo-flex img {
+  max-width: 200px;
+  height: auto;
+}
+
+.navbar .flex {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar .flex li {
+  margin: 0 1rem;
+}
+
+.navbar .flex li a {
+  color: black;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.navbar .flex li a:hover {
+  color: #f39c12; /* Golden color on hover */
+}
+
+.navbar .menu {
+  display: none; /* Hidden on desktop */
+}
+
+@media (max-width: 768px) {
+  .navbar .flex {
+    display: none; /* Hide the menu items */
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+  }
+
+  .navbar .flex li {
+    margin: 1rem 0;
+  }
+
+  .navbar .menu {
+    display: block; /* Show menu icon on mobile */
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+  }
+
+  .navbar .menu.active + .flex {
+    display: flex; /* Show the menu items when the menu icon is clicked */
+  }
+}

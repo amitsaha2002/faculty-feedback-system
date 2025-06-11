@@ -1,0 +1,85 @@
+.container {
+  padding: 40px;
+  text-align: center;
+}
+
+.heading h2 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.heading p {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.teamGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.teamCard {
+  position: relative;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  transition: transform 0.3s ease;
+}
+
+.teamCard:hover {
+  transform: scale(1.05);
+}
+
+.teamImg {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.teamImg img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.teamImg:hover .overlay {
+  opacity: 1;
+}
+
+.socials a {
+  margin: 0 10px;
+  color: white;
+  font-size: 24px;
+  text-decoration: none;
+}
+
+.teamTitle {
+  margin-top: 15px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.teamRole {
+  display: block;
+  margin-top: 5px;
+  color: #888;
+  font-size: 16px;
+}
