@@ -33,11 +33,11 @@ const AdminDashboard = () => {
           <div className={styles['side-user']}>
             <div
               className={styles['side-img']}
-              style={{ backgroundImage: `url(../images/amit.png)` }}
+              style={{ backgroundImage: `url(../images/profilepic.jpg)` }}
             ></div>
             <div className={styles.user}>
               <small>
-                <b>Dr Amit Saha</b>
+                <b>Admin</b>
               </small>
               <p>
                 Associate Professor,
@@ -72,21 +72,21 @@ const AdminDashboard = () => {
             className={styles.box}
             onClick={() => handleNavigation('/facultyregister')}
           >
-            <img src="/fms.png" alt="Faculty Management" />
+            <img src="../images/fms.png" alt="Faculty Management" />
             <p>Faculty Management System</p>
           </div>
           <div
             className={styles.box}
             onClick={() => handleNavigation('/studentregister')}
           >
-            <img src="/sms.png" alt="Student Management" />
+            <img src="../images/sms.png" alt="Student Management" />
             <p>Student Management System</p>
           </div>
           <div
             className={styles.box}
             onClick={() => handleNavigation('/viewfeedback')}
           >
-            <img src="/vf.webp" alt="View Feedback" />
+            <img src="../images/vf.webp" alt="View Feedback" />
             <p>View Feedback</p>
           </div>
         </div>

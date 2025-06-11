@@ -6,12 +6,6 @@ const Homepage = () => {
   return (
     <div className={styles.main}>
       <div className={styles.page1}>
-        <div className={styles.marqueeContainer}>
-          <marquee behavior="scroll" direction="left" id="visitorMarquee">
-            Loading visitor count...
-          </marquee>
-        </div>
-
         <div className={styles.imgSlider}>
           <div className={styles.mySlide}>
             {[
@@ -83,7 +77,7 @@ const Homepage = () => {
           {[
             {
               side: 'left',
-              img: '1.png',
+              img: '../images/1.png',
               title: 'Sign Up\n(For New Users):',
               text: (
                 <>
@@ -96,7 +90,7 @@ const Homepage = () => {
             },
             {
               side: 'right',
-              img: '2.png',
+              img: '../images/2.png',
               title: 'Log In\n(For Returning Users):',
               text: (
                 <>
@@ -109,7 +103,7 @@ const Homepage = () => {
             },
             {
               side: 'left',
-              img: '3.png',
+              img: '../images/3.png',
               title: 'Next Steps Based on User Type:',
               text: (
                 <>
@@ -121,7 +115,7 @@ const Homepage = () => {
             },
             {
               side: 'right',
-              img: '4.png',
+              img: '../images/4.png',
               title: 'Next Steps Based on User Type:',
               text: (
                 <>
@@ -133,7 +127,7 @@ const Homepage = () => {
             },
             {
               side: 'left',
-              img: '5.png',
+              img: '../images/5.png',
               title: 'Next Steps Based on User Type:',
               text: (
                 <>
@@ -145,7 +139,7 @@ const Homepage = () => {
             },
             {
               side: 'right',
-              img: '6.png',
+              img: '../images/6.png',
               title: 'Thank You For Visiting Our Website',
               text: '',
             },
