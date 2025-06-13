@@ -24,6 +24,8 @@ import FacultyList from './pages/FacultyList';
 import Feedback from './pages/Feedback';
 import FacultyDetails from './pages/FacultyDetails';
 import FeedbackForm from './pages/FeedbackForm';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 
 function App() {
   return (
@@ -42,7 +44,9 @@ function AppWithRouter() {
     location.pathname.startsWith('/feedback/') ||
     location.pathname.startsWith('/feedbackform/') ||
     location.pathname === '/facultydetails' ||
-    location.pathname === '/viewfeedback';
+    location.pathname === '/viewfeedback' ||
+    location.pathname === '/forgot-password' ||
+    location.pathname.startsWith('/reset-password/');
 
   return (
     <>
@@ -62,6 +66,8 @@ function AppWithRouter() {
         <Route path="/feedback/:facultyId" element={<Feedback />} />
         <Route path="/facultydetails" element={<FacultyDetails />} />
         <Route path="/feedbackform/:facultyId" element={<FeedbackForm />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
       </Routes>
       {!hideFooter && <Footer />} {/* Conditional rendering of Footer */}
     </>

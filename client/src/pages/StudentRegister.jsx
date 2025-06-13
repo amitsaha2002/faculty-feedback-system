@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from '../styles/StudentRegister.module.css';
 import 'boxicons/css/boxicons.min.css';
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = process.env.REACT_APP_API;
 
 const StudentRegister = () => {
   const [students, setStudents] = useState([]);
@@ -56,12 +56,10 @@ const StudentRegister = () => {
     setShowModal(false);
     setFormData({
       name: '',
-      username: '',
       email: '',
       rollno: '',
       branch: '',
       phoneno: '',
-      password: '',
     });
     setEditIndex(null);
     setError(null);
@@ -75,14 +73,16 @@ const StudentRegister = () => {
     try {
       setLoading(true);
       setError(null);
-      
-      const { name, username, email, rollno, branch, phoneno, password } = formData;
-      if (!name || !username || !email || !rollno || !branch || !phoneno || (!editIndex && !password)) {
+
+      const { name, email, rollno, branch, phoneno } = formData;
+      if (!name || !email || !rollno || !branch || !phoneno) {
         setError('Please fill all fields.');
+        console.log('Saving student data:', { ...formData });
+
         return;
       }
 
-      console.log('Saving student data:', { ...formData, password: '***' });
+      console.log('Saving student data:', { ...formData });
       let response;
       if (editIndex !== null) {
         // Update existing student
@@ -108,7 +108,7 @@ const StudentRegister = () => {
 
       const data = await response.json();
       console.log('Server response:', data);
-      
+
       if (!response.ok) {
         throw new Error(data.error || 'Something went wrong');
       }
@@ -207,7 +207,7 @@ const StudentRegister = () => {
               />
             </div>
 
-            <div className={styles.formGroup}>
+            {/* <div className={styles.formGroup}>
               <i className="bx bx-user"></i>
               <input
                 type="text"
@@ -218,7 +218,7 @@ const StudentRegister = () => {
                 placeholder="Enter Username"
                 required
               />
-            </div>
+            </div> */}
 
             <div className={styles.formGroup}>
               <i className="bx bx-envelope"></i>
@@ -272,7 +272,7 @@ const StudentRegister = () => {
               />
             </div>
 
-            <div className={styles.formGroup}>
+            {/* <div className={styles.formGroup}>
               <i className="bx bx-lock-alt"></i>
               <input
                 type="password"
@@ -280,13 +280,17 @@ const StudentRegister = () => {
                 className={styles.inputBox}
                 value={formData.password}
                 onChange={handleChange}
-                placeholder={editIndex !== null ? 'Leave blank to keep existing password' : 'Enter Password'}
+                placeholder={
+                  editIndex !== null
+                    ? 'Leave blank to keep existing password'
+                    : 'Enter Password'
+                }
                 required={editIndex === null}
               />
-            </div>
+            </div> */}
 
-            <button 
-              className={styles.btn} 
+            <button
+              className={styles.btn}
               onClick={saveStudent}
               disabled={loading}
             >
@@ -304,14 +308,16 @@ const StudentRegister = () => {
       </div>
 
       {error && !showModal && <div className={styles.error}>{error}</div>}
-      
-      {loading && !showModal && <div className={styles.loading}>Loading...</div>}
+
+      {loading && !showModal && (
+        <div className={styles.loading}>Loading...</div>
+      )}
 
       <table id="studentTable">
         <thead>
           <tr>
             <th>Name</th>
-            <th>Username</th>
+            {/* <th>Username</th> */}
             <th>Email</th>
             <th>Roll Number</th>
             <th>Branch</th>
@@ -323,7 +329,7 @@ const StudentRegister = () => {
           {students.map((student, index) => (
             <tr key={student._id}>
               <td>{student.name}</td>
-              <td>{student.username}</td>
+              {/* <td>{student.username}</td> */}
               <td>{student.email}</td>
               <td>{student.rollno}</td>
               <td>{student.branch}</td>

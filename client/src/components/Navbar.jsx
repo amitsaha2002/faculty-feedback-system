@@ -15,15 +15,15 @@ const Navbar = () => {
         <li>
           <Link to="/admin">ADMIN</Link>
         </li>
-        <li>
+        {/* <li>
           <Link to="/faculty">FACULTY</Link>
-        </li>
+        </li> */}
         <li>
           <Link to="/student">STUDENT</Link>
         </li>
-        <li>
+        {/* <li>
           <Link to="/contact">CONTACT US</Link>
-        </li>
+        </li> */}
         <li>
           <Link to="/team">TEAM</Link>
         </li>

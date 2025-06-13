@@ -23,15 +23,15 @@ const Footer = () => {
             <li>
               <a href="/admin">ADMIN</a>
             </li>
-            <li>
+            {/* <li>
               <a href="/faculty">FACULTY</a>
-            </li>
+            </li> */}
             <li>
               <a href="/student">STUDENT</a>
             </li>
-            <li>
+            {/* <li>
               <a href="/contact">CONTACT US</a>
-            </li>
+            </li> */}
           </ul>
         </div>
         {/* Contact */}

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from '../styles/FacultyRegister.module.css';
 import 'boxicons/css/boxicons.min.css';
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = process.env.REACT_APP_API;
 
 const FacultyRegister = () => {
   const [faculties, setFaculties] = useState([]);
@@ -68,9 +68,9 @@ const FacultyRegister = () => {
     try {
       setLoading(true);
       setError(null);
-      
+
       const { name, username, email, department, phoneno, password } = formData;
-      if (!name || !username || !email || !department || !phoneno || !password) {
+      if (!name || !email || !department || !phoneno) {
         setError('Please fill all fields.');
         return;
       }
@@ -98,7 +98,7 @@ const FacultyRegister = () => {
       }
 
       const data = await response.json();
-      
+
       if (!response.ok) {
         throw new Error(data.error || 'Something went wrong');
       }
@@ -194,7 +194,7 @@ const FacultyRegister = () => {
               />
             </div>
 
-            <div className={styles.formGroup}>
+            {/* <div className={styles.formGroup}>
               <i className="bx bx-user"></i>
               <input
                 type="text"
@@ -205,7 +205,7 @@ const FacultyRegister = () => {
                 placeholder="Enter Username"
                 required
               />
-            </div>
+            </div> */}
 
             <div className={styles.formGroup}>
               <i className="bx bx-envelope"></i>
@@ -246,7 +246,7 @@ const FacultyRegister = () => {
               />
             </div>
 
-            <div className={styles.formGroup}>
+            {/* <div className={styles.formGroup}>
               <i className="bx bx-lock-alt"></i>
               <input
                 type="password"
@@ -254,13 +254,17 @@ const FacultyRegister = () => {
                 className={styles.inputBox}
                 value={formData.password}
                 onChange={handleChange}
-                placeholder={editIndex !== null ? 'Leave blank to keep existing password' : 'Enter Password'}
+                placeholder={
+                  editIndex !== null
+                    ? 'Leave blank to keep existing password'
+                    : 'Enter Password'
+                }
                 required={editIndex === null}
               />
-            </div>
+            </div> */}
 
-            <button 
-              className={styles.btn} 
+            <button
+              className={styles.btn}
               onClick={saveFaculty}
               disabled={loading}
             >
@@ -278,14 +282,16 @@ const FacultyRegister = () => {
       </div>
 
       {error && !showModal && <div className={styles.error}>{error}</div>}
-      
-      {loading && !showModal && <div className={styles.loading}>Loading...</div>}
+
+      {loading && !showModal && (
+        <div className={styles.loading}>Loading...</div>
+      )}
 
       <table id="facultyTable">
         <thead>
           <tr>
             <th>Name</th>
-            <th>Username</th>
+            {/* <th>Username</th> */}
             <th>Email</th>
             <th>Department</th>
             <th>Phone Number</th>
@@ -296,7 +302,7 @@ const FacultyRegister = () => {
           {faculties.map((faculty, index) => (
             <tr key={faculty._id}>
               <td>{faculty.name}</td>
-              <td>{faculty.username}</td>
+              {/* <td>{faculty.username}</td> */}
               <td>{faculty.email}</td>
               <td>{faculty.department}</td>
               <td>{faculty.phoneno}</td>

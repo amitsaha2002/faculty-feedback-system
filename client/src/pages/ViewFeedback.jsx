@@ -4,7 +4,7 @@ import styles from '../styles/ViewFeedback.module.css'; // Adjust path as needed
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'remixicon/fonts/remixicon.css';
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = process.env.REACT_APP_API;
 
 const ViewFeedback = () => {
   const navigate = useNavigate();

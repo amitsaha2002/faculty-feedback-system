@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styles from '../styles/FacultyList.module.css'; // CSS Module
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = process.env.REACT_APP_API;
 
 const FacultyList = () => {
   const [faculties, setFaculties] = useState([]);
@@ -21,11 +21,13 @@ const FacultyList = () => {
       setLoading(true);
       const response = await fetch(`${API_URL}/faculty/details`);
       const data = await response.json();
-      
+
       if (response.ok) {
         setFaculties(data.faculties);
         // Extract unique departments for filter dropdown
-        const uniqueDepartments = [...new Set(data.faculties.map(f => f.department))].sort();
+        const uniqueDepartments = [
+          ...new Set(data.faculties.map((f) => f.department)),
+        ].sort();
         setDepartments(uniqueDepartments);
       } else {
         setError(data.error);
@@ -45,9 +47,12 @@ const FacultyList = () => {
     setFilterDepartment(e.target.value);
   };
 
-  const filteredFaculties = faculties.filter(faculty => {
-    const matchesSearch = faculty.name.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesDepartment = !filterDepartment || faculty.department === filterDepartment;
+  const filteredFaculties = faculties.filter((faculty) => {
+    const matchesSearch = faculty.name
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+    const matchesDepartment =
+      !filterDepartment || faculty.department === filterDepartment;
     return matchesSearch && matchesDepartment;
   });
 
@@ -108,10 +113,15 @@ const FacultyList = () => {
             </div>
 
             <div className={styles.filterBox}>
-              <select value={filterDepartment} onChange={handleDepartmentFilter}>
+              <select
+                value={filterDepartment}
+                onChange={handleDepartmentFilter}
+              >
                 <option value="">All Departments</option>
-                {departments.map(dept => (
-                  <option key={dept} value={dept}>{dept}</option>
+                {departments.map((dept) => (
+                  <option key={dept} value={dept}>
+                    {dept}
+                  </option>
                 ))}
               </select>
             </div>

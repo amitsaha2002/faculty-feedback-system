@@ -14,18 +14,15 @@ const getStudents = async (req, res) => {
 const registerStudent = async (req, res) => {
   try {
     console.log('Received registration request:', req.body);
-    const { name, username, email, rollno, branch, phoneno, password } = req.body;
+    const { name, email, rollno, branch, phoneno } = req.body;
 
     // Check if username or email already exists
-    const existingStudent = await Student.findOne({ 
-      $or: [{ username }, { email }, { rollno }] 
+    const existingStudent = await Student.findOne({
+      $or: [{ email }, { rollno }],
     });
-    
+
     if (existingStudent) {
       console.log('Found existing student:', existingStudent);
-      if (existingStudent.username === username) {
-        return res.status(400).json({ error: 'Username already exists' });
-      }
       if (existingStudent.email === email) {
         return res.status(400).json({ error: 'Email already exists' });
       }
@@ -38,12 +35,12 @@ const registerStudent = async (req, res) => {
     // Create new student
     const student = await Student.create({
       name,
-      username,
+      // username,
       email,
       rollno,
       branch,
       phoneno,
-      password
+      // password
     });
 
     console.log('Student created successfully:', student._id);
@@ -72,8 +69,8 @@ const updateStudent = async (req, res) => {
         $or: [
           updates.username ? { username: updates.username } : null,
           updates.email ? { email: updates.email } : null,
-          updates.rollno ? { rollno: updates.rollno } : null
-        ].filter(Boolean)
+          updates.rollno ? { rollno: updates.rollno } : null,
+        ].filter(Boolean),
       });
 
       if (existingStudent) {
@@ -125,5 +122,5 @@ module.exports = {
   getStudents,
   registerStudent,
   updateStudent,
-  deleteStudent
-}; 
+  deleteStudent,
+};

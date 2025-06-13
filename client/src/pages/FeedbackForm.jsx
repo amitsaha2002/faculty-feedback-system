@@ -8,7 +8,7 @@ import {
   faIdCard,
 } from '@fortawesome/free-solid-svg-icons';
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = process.env.REACT_APP_API;
 
 const QUESTIONS = [
   {

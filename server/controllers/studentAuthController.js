@@ -4,15 +4,17 @@ const jwt = require('jsonwebtoken');
 // Login student
 const login = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
     // Check if username and password are provided
-    if (!username || !password) {
-      return res.status(400).json({ error: 'Please provide username and password' });
+    if (!email || !password) {
+      return res
+        .status(400)
+        .json({ error: 'Please provide username and password' });
     }
 
     // Find student by username
-    const student = await Student.findOne({ username });
+    const student = await Student.findOne({ email });
     if (!student) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
@@ -38,9 +40,9 @@ const login = async (req, res) => {
         username: student.username,
         email: student.email,
         rollno: student.rollno,
-        branch: student.branch
+        branch: student.branch,
       },
-      token
+      token,
     });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -50,6 +52,8 @@ const login = async (req, res) => {
 // Get current student profile
 const getCurrentStudent = async (req, res) => {
   try {
+    console.log(req.user);
+    console.log(req.body.userId);
     const student = await Student.findById(req.user.userId).select('-password');
     if (!student) {
       return res.status(404).json({ error: 'Student not found' });
@@ -62,5 +66,5 @@ const getCurrentStudent = async (req, res) => {
 
 module.exports = {
   login,
-  getCurrentStudent
-}; 
+  getCurrentStudent,
+};

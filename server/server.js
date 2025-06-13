@@ -6,6 +6,7 @@ const facultyRoutes = require('./routes/facultyRoutes');
 const studentRoutes = require('./routes/studentRoutes');
 const feedbackRoutes = require('./routes/feedbackRoutes');
 const studentAuthRoutes = require('./routes/studentAuthRoutes');
+const passwordResetRoutes = require('./routes/passwordResetRoutes');
 
 // Express app
 const app = express();
@@ -39,6 +40,7 @@ app.use('/api/faculty', facultyRoutes);
 app.use('/api/student', studentRoutes);
 app.use('/api/feedback', feedbackRoutes);
 app.use('/api/student-auth', studentAuthRoutes);
+app.use('/api', passwordResetRoutes);
 
 // MongoDB connection
 console.log('Attempting to connect to MongoDB...');

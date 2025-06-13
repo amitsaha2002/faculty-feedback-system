@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import styles from '../styles/studentlogin.module.css';
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = process.env.REACT_APP_API;
 
 const Student = () => {
   const navigate = useNavigate();
@@ -66,7 +66,7 @@ const Student = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ email: username, password }),
       });
 
       const data = await response.json();
@@ -111,7 +111,7 @@ const Student = () => {
 
         <form onSubmit={handleLogin}>
           <div className={styles.formGroup}>
-            <label htmlFor="username">Username</label>
+            <label htmlFor="username">Email</label>
             <input
               type="text"
               id="username"
@@ -163,6 +163,10 @@ const Student = () => {
           <button type="submit" className={styles.submitBtn} disabled={loading}>
             {loading ? 'Logging in...' : 'Login'}
           </button>
+
+          <div className={styles.forgotPassword}>
+            <Link to="/forgot-password">Forgot Password?</Link>
+          </div>
         </form>
       </div>
     </>

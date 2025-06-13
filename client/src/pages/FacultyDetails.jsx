@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from '../styles/FacultyDetails.module.css';
 import 'boxicons/css/boxicons.min.css';
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = process.env.REACT_APP_API;
 
 const FacultyDetails = () => {
   const [faculties, setFaculties] = useState([]);
@@ -38,18 +38,18 @@ const FacultyDetails = () => {
       setLoading(true);
       const response = await fetch(`${API_URL}/faculty/details`);
       const data = await response.json();
-      
+
       if (response.ok) {
         // Get student's branch from localStorage
         const studentBranch = localStorage.getItem('studentBranch');
         console.log('Student Branch:', studentBranch); // Debug log
-        
+
         // Filter faculties based on student's branch
-        const filteredFaculties = data.faculties.filter(faculty => {
+        const filteredFaculties = data.faculties.filter((faculty) => {
           console.log('Faculty Department:', faculty.department); // Debug log
           return faculty.department === studentBranch;
         });
-        
+
         console.log('Filtered Faculties:', filteredFaculties); // Debug log
         setFaculties(filteredFaculties);
       } else {
@@ -70,7 +70,7 @@ const FacultyDetails = () => {
     navigate(`/feedbackform/${facultyId}`);
   };
 
-  const filteredFaculties = faculties.filter(faculty => 
+  const filteredFaculties = faculties.filter((faculty) =>
     faculty.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 

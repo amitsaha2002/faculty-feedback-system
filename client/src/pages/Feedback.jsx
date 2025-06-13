@@ -5,22 +5,22 @@ import { FaIdCard, FaBars, FaRightFromBracket } from 'react-icons/fa6';
 import Chart from '../components/Chart';
 import styles from '../styles/Feedback.module.css'; // CSS Module
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = process.env.REACT_APP_API;
 
 const QUESTIONS = [
-  "How clearly did the faculty member explain the course objectives and expectations?",
-  "Did the faculty member make the class content engaging and interesting?",
-  "Was the course material (textbooks, notes, online resources) provided by the faculty helpful and sufficient?",
-  "How effectively did the faculty manage time during lectures and cover the syllabus?",
+  'How clearly did the faculty member explain the course objectives and expectations?',
+  'Did the faculty member make the class content engaging and interesting?',
+  'Was the course material (textbooks, notes, online resources) provided by the faculty helpful and sufficient?',
+  'How effectively did the faculty manage time during lectures and cover the syllabus?',
   "How responsive was the faculty member to students' questions and concerns during lectures?",
-  "How effectively did the faculty member present and explain complex topics?",
-  "Did the faculty complete the syllabus within the allotted time frame?",
-  "Did the faculty give students enough time to prepare for exams and assignments?",
-  "Was the faculty punctual in attending scheduled classes?",
-  "Do faculty treat all students fairly and without bias?",
-  "How often did the faculty motivate and encourage students to perform better?",
-  "How respectful and polite is the faculty member when interacting with students?",
-  "Was the faculty open to answering unexpected or challenging questions from students?"
+  'How effectively did the faculty member present and explain complex topics?',
+  'Did the faculty complete the syllabus within the allotted time frame?',
+  'Did the faculty give students enough time to prepare for exams and assignments?',
+  'Was the faculty punctual in attending scheduled classes?',
+  'Do faculty treat all students fairly and without bias?',
+  'How often did the faculty motivate and encourage students to perform better?',
+  'How respectful and polite is the faculty member when interacting with students?',
+  'Was the faculty open to answering unexpected or challenging questions from students?',
 ];
 
 const RATING_KEYS = [
@@ -36,7 +36,7 @@ const RATING_KEYS = [
   'fairness',
   'motivation',
   'respect',
-  'openness'
+  'openness',
 ];
 
 const GRADES = [
@@ -44,7 +44,7 @@ const GRADES = [
   { rating: 4, grade: 'GOOD', color: '#a7f39a' },
   { rating: 3, grade: 'NEUTRAL', color: '#fffb04' },
   { rating: 2, grade: 'SATISFACTORY', color: '#f58f8f' },
-  { rating: 1, grade: 'NOT SATISFACTORY', color: '#ff0000' }
+  { rating: 1, grade: 'NOT SATISFACTORY', color: '#ff0000' },
 ];
 
 const Feedback = () => {
@@ -61,7 +61,9 @@ const Feedback = () => {
   const fetchFeedbackData = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${API_URL}/feedback/aggregated/${facultyId}`);
+      const response = await fetch(
+        `${API_URL}/feedback/aggregated/${facultyId}`
+      );
       const data = await response.json();
 
       if (!response.ok) {
@@ -95,18 +97,20 @@ const Feedback = () => {
 
   const chartData = {
     labels: QUESTIONS.map((_, idx) => `Question ${idx + 1}`),
-    datasets: [{
-      label: 'DISTRIBUTION OF FEEDBACK SCORES',
-      data: RATING_KEYS.map(key => feedbackData.averageRatings[key]),
-      backgroundColor: RATING_KEYS.map(key => {
-        const rating = Math.round(feedbackData.averageRatings[key]);
-        return GRADES.find(g => g.rating === rating)?.color || '#ccc';
-      }),
-      borderColor: 'rgba(0,0,0,0.2)',
-      borderWidth: 1,
-      barPercentage: 0.8,
-      categoryPercentage: 0.9,
-    }]
+    datasets: [
+      {
+        label: 'DISTRIBUTION OF FEEDBACK SCORES',
+        data: RATING_KEYS.map((key) => feedbackData.averageRatings[key]),
+        backgroundColor: RATING_KEYS.map((key) => {
+          const rating = Math.round(feedbackData.averageRatings[key]);
+          return GRADES.find((g) => g.rating === rating)?.color || '#ccc';
+        }),
+        borderColor: 'rgba(0,0,0,0.2)',
+        borderWidth: 1,
+        barPercentage: 0.8,
+        categoryPercentage: 0.9,
+      },
+    ],
   };
 
   return (
@@ -127,13 +131,22 @@ const Feedback = () => {
             <table width="100%">
               <thead>
                 <tr align="center">
-                  <th rowSpan="2" style={{ backgroundColor: '#0a1ef6', color: '#fff' }}>
+                  <th
+                    rowSpan="2"
+                    style={{ backgroundColor: '#0a1ef6', color: '#fff' }}
+                  >
                     Feedback On
                   </th>
-                  <th colSpan="5" style={{ backgroundColor: '#0a1ef6', color: '#fff' }}>
+                  <th
+                    colSpan="5"
+                    style={{ backgroundColor: '#0a1ef6', color: '#fff' }}
+                  >
                     Rating Distribution
                   </th>
-                  <th rowSpan="2" style={{ backgroundColor: '#0a1ef6', color: '#fff' }}>
+                  <th
+                    rowSpan="2"
+                    style={{ backgroundColor: '#0a1ef6', color: '#fff' }}
+                  >
                     Average
                   </th>
                 </tr>
@@ -149,9 +162,13 @@ const Feedback = () => {
                 {QUESTIONS.map((question, idx) => (
                   <tr key={idx}>
                     <td>{`${idx + 1}. ${question}`}</td>
-                    {[5, 4, 3, 2, 1].map(rating => (
+                    {[5, 4, 3, 2, 1].map((rating) => (
                       <td key={rating} align="center">
-                        {feedbackData.ratingDistribution[RATING_KEYS[idx]][rating]}
+                        {
+                          feedbackData.ratingDistribution[RATING_KEYS[idx]][
+                            rating
+                          ]
+                        }
                       </td>
                     ))}
                     <td align="center">
