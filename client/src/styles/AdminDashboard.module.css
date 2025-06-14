@@ -141,3 +141,61 @@ button:hover {
   transform: translateY(-5px);
   background-color: #d6d8db;
 }
+
+/* Mobile View Styles */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 20px;
+  }
+
+  .flex {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .sidebar {
+    position: absolute;
+    width: 100px;
+    height: 100%;
+    left: -200px; /* Hide off-screen */
+    transition: left 0.3s ease;
+    z-index: 1000;
+  }
+
+  .sidebar.active {
+    left: 0;
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding: 20px;
+  }
+
+  .admincontainer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .box {
+    width: 100%;
+    max-width: 90%;
+  }
+
+  .logo-flex img {
+    max-height: 40px;
+  }
+
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  button {
+    width: 100%;
+    text-align: center;
+  }
+}
