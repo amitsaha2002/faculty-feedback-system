@@ -142,22 +142,53 @@
   background-color: #00c4b4;
 }
 
-/* Responsive */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .form {
+    width: 300px;
     padding: 1.5rem;
+    margin-top: 2rem;
   }
 
   .formHeader h2 {
     font-size: 1.5rem;
   }
 
+  .formHeader p {
+    font-size: 0.85rem;
+  }
+
   .formInput input,
   .captchaForm input {
     font-size: 0.95rem;
+    padding: 0.5rem 0.8rem;
+  }
+
+  .captchaForm {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .captchaRefresh {
+    width: 100%;
+    padding: 0.6rem;
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
+  }
+
+  .preview {
+    font-size: 1rem;
+    padding: 0.4rem;
+  }
+
+  .supportLinks {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.85rem;
   }
 
   .formSubmit button {
     font-size: 1rem;
+    padding: 0.6rem;
   }
 }

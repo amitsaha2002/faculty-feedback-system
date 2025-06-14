@@ -75,59 +75,60 @@ const Homepage = () => {
         <h1>Steps for accessing the website</h1>
         <div className={styles.timeline}>
           {[
+            // {
+            //   side: 'left',
+            //   img: '../images/1.png',
+            //   title: 'Sign Up\n(For New Users):',
+            //   text: (
+            //     <>
+            //       If you are a new user, go to the Sign-Up page. <br />
+            //       Enter your details (name, email, password, etc.). <br />
+            //       Select your user type (Admin, Faculty, or Student). <br />
+            //       Complete the registration process.
+            //     </>
+            //   ),
+            // },
             {
               side: 'left',
               img: '../images/1.png',
-              title: 'Sign Up\n(For New Users):',
+              title: 'Log In:',
               text: (
                 <>
-                  If you are a new user, go to the Sign-Up page. <br />
-                  Enter your details (name, email, password, etc.). <br />
-                  Select your user type (Admin, Faculty, or Student). <br />
-                  Complete the registration process.
+                  If you already have an account, go to the Login page. <br />
+                  Enter your email and password. <br />
+                  Click the Login button.
                 </>
               ),
             },
             {
               side: 'right',
               img: '../images/2.png',
-              title: 'Log In\n(For Returning Users):',
-              text: (
-                <>
-                  If you already have an account, go to the Login page. <br />
-                  Enter your email and password. <br />
-                  Select your user type (Admin, Faculty, or Student). <br />
-                  Click the Login button.
-                </>
-              ),
-            },
-            {
-              side: 'left',
-              img: '../images/3.png',
               title: 'Next Steps Based on User Type:',
               text: (
                 <>
                   If you're an <b>Admin:</b> <br />
-                  Login <br />→ View all faculty members <br />→ See feedback
-                  (rating & comments).
+                  Login <br />→ Register new students
+                  <br />→ View all students
+                  <br />→ Register new faculty members
+                  <br />→ View all faculty members <br />→ See feedbacks.
                 </>
               ),
             },
-            {
-              side: 'right',
-              img: '../images/4.png',
-              title: 'Next Steps Based on User Type:',
-              text: (
-                <>
-                  If you're a <b>Faculty Member:</b> <br />
-                  Login <br />→ View personal dashboard <br />→ See own feedback
-                  from students.
-                </>
-              ),
-            },
+            // {
+            //   side: 'left',
+            //   img: '../images/3.png',
+            //   title: 'Next Steps Based on User Type:',
+            //   text: (
+            //     <>
+            //       If you're a <b>Faculty Member:</b> <br />
+            //       Login <br />→ View personal dashboard <br />→ See own feedback
+            //       from students.
+            //     </>
+            //   ),
+            // },
             {
               side: 'left',
-              img: '../images/5.png',
+              img: '../images/3.png',
               title: 'Next Steps Based on User Type:',
               text: (
                 <>
@@ -139,7 +140,7 @@ const Homepage = () => {
             },
             {
               side: 'right',
-              img: '../images/6.png',
+              img: '../images/4.png',
               title: 'Thank You For Visiting Our Website',
               text: '',
             },

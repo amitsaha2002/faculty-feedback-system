@@ -65,3 +65,41 @@ footer {
   text-align: center;
   background-color: rgb(113, 110, 110);
 }
+
+@media (max-width: 768px) {
+  .footer_info {
+    flex-direction: column;
+    padding: 30px 0;
+    gap: 2rem;
+  }
+
+  .about,
+  .contact,
+  .link {
+    width: 100%;
+    padding: 0;
+    text-align: center;
+  }
+
+  .footer_info h2 {
+    font-size: 1.4rem;
+  }
+
+  .link ul li a {
+    font-size: 1rem;
+  }
+
+  .contact ul li {
+    justify-content: center;
+    font-size: 0.95rem;
+  }
+
+  .contact ul li span {
+    margin-right: 8px;
+  }
+
+  .copy-right {
+    font-size: 0.9rem;
+    padding: 10px 0;
+  }
+}

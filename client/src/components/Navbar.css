@@ -43,25 +43,45 @@
 }
 
 @media (max-width: 768px) {
-  .navbar .flex {
-    display: none; /* Hide the menu items */
+  .navbar {
     flex-direction: column;
-    width: 100%;
-    text-align: center;
+    align-items: flex-start;
+    padding: 1rem;
   }
 
-  .navbar .flex li {
-    margin: 1rem 0;
+  .navbar .logo-flex img {
+    max-width: 150px;
   }
 
   .navbar .menu {
-    display: block; /* Show menu icon on mobile */
-    font-size: 2rem;
-    color: white;
+    display: block;
+    font-size: 1.5rem;
     cursor: pointer;
+    margin-left: auto;
   }
 
-  .navbar .menu.active + .flex {
-    display: flex; /* Show the menu items when the menu icon is clicked */
+  .navbar .flex {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 1rem;
+    gap: 1rem;
+  }
+
+  .navbar .flex.show {
+    display: flex;
+  }
+
+  .navbar .flex li {
+    margin: 0;
+    width: 100%;
+  }
+
+  .navbar .flex li a {
+    display: block;
+    padding: 0.75rem;
+    font-size: 1rem;
+    width: 100%;
+    border-bottom: 1px solid #eee;
   }
 }

@@ -28,9 +28,13 @@ const createFaculty = async (req, res) => {
     const { name, username, email, department, phoneno, password } = req.body;
 
     // Check if faculty with same email or username exists
-    const existingFaculty = await Faculty.findOne({ $or: [{ email }, { username }] });
+    const existingFaculty = await Faculty.findOne({
+      $or: [{ email }, { username }],
+    });
     if (existingFaculty) {
-      return res.status(400).json({ error: 'Email or username already exists' });
+      return res
+        .status(400)
+        .json({ error: 'Email or username already exists' });
     }
 
     const faculty = await Faculty.create({
@@ -76,7 +80,9 @@ const updateFaculty = async (req, res) => {
         _id: { $ne: id },
       });
       if (existingFaculty) {
-        return res.status(400).json({ error: 'Email or username already exists' });
+        return res
+          .status(400)
+          .json({ error: 'Email or username already exists' });
       }
     }
 
@@ -108,7 +114,7 @@ const deleteFaculty = async (req, res) => {
   try {
     const { id } = req.params;
     const faculty = await Faculty.findByIdAndDelete(id);
-    
+
     if (!faculty) {
       return res.status(404).json({ error: 'Faculty not found' });
     }
@@ -138,5 +144,5 @@ module.exports = {
   createFaculty,
   updateFaculty,
   deleteFaculty,
-  getFacultiesByDepartment
-}; 
+  getFacultiesByDepartment,
+};
