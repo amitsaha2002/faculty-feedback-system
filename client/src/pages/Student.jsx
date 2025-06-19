@@ -117,7 +117,7 @@ const Student = () => {
               id="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="Enter your username"
+              placeholder="Enter your email"
               required
               disabled={loading}
             />

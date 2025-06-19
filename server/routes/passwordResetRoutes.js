@@ -52,7 +52,7 @@ router.post('/forgot-password', async (req, res) => {
     console.log('5. Saved token to student document');
 
     // Create reset URL
-    const resetUrl = `http://192.168.100.108:3000/reset-password/${resetToken}`;
+    const resetUrl = `http://192.168.196.17:3000/reset-password/${resetToken}`;
 
     // Verify SMTP connection
     try {
@@ -113,24 +113,19 @@ router.get('/verify-reset-token/:token', async (req, res) => {
   try {
     const { token } = req.params;
 
-    // Find student with non-expired token
-    const student = await Student.findOne({
+    // Get all students with unexpired reset tokens
+    const students = await Student.find({
       resetPasswordExpires: { $gt: Date.now() },
     });
 
-    if (!student) {
-      return res
-        .status(400)
-        .json({ message: 'Password reset token is invalid or has expired.' });
+    for (const student of students) {
+      const isValid = await bcrypt.compare(token, student.resetPasswordToken);
+      if (isValid) {
+        return res.status(200).json({ message: 'Token is valid.' });
+      }
     }
 
-    // Verify token
-    const isValid = await bcrypt.compare(token, student.resetPasswordToken);
-    if (!isValid) {
-      return res.status(400).json({ message: 'Invalid reset token.' });
-    }
-
-    res.status(200).json({ message: 'Token is valid.' });
+    return res.status(400).json({ message: 'Invalid or expired reset token.' });
   } catch (error) {
     console.error('Token verification error:', error);
     res.status(500).json({ message: 'Error verifying reset token.' });
@@ -143,30 +138,25 @@ router.post('/reset-password/:token', async (req, res) => {
     const { token } = req.params;
     const { password } = req.body;
 
-    // Find student with non-expired token
-    const student = await Student.findOne({
+    const students = await Student.find({
       resetPasswordExpires: { $gt: Date.now() },
     });
 
-    if (!student) {
-      return res
-        .status(400)
-        .json({ message: 'Password reset token is invalid or has expired.' });
+    for (const student of students) {
+      const isValid = await bcrypt.compare(token, student.resetPasswordToken);
+      if (isValid) {
+        student.password = password;
+        student.resetPasswordToken = undefined;
+        student.resetPasswordExpires = undefined;
+        await student.save();
+
+        return res
+          .status(200)
+          .json({ message: 'Password has been reset successfully.' });
+      }
     }
 
-    // Verify token
-    const isValid = await bcrypt.compare(token, student.resetPasswordToken);
-    if (!isValid) {
-      return res.status(400).json({ message: 'Invalid reset token.' });
-    }
-
-    // Update password and clear reset token fields
-    student.password = password;
-    student.resetPasswordToken = undefined;
-    student.resetPasswordExpires = undefined;
-    await student.save();
-
-    res.status(200).json({ message: 'Password has been reset successfully.' });
+    return res.status(400).json({ message: 'Invalid or expired reset token.' });
   } catch (error) {
     console.error('Password reset error:', error);
     res.status(500).json({ message: 'Error resetting password.' });
