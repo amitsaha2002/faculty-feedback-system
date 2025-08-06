@@ -52,7 +52,7 @@ router.post('/forgot-password', async (req, res) => {
     console.log('5. Saved token to student document');
 
     // Create reset URL
-    const resetUrl = `http://192.168.196.17:3000/reset-password/${resetToken}`;
+    const resetUrl = `http://192.168.34.17:3000/reset-password/${resetToken}`;
 
     // Verify SMTP connection
     try {
